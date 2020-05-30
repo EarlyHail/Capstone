@@ -1,0 +1,35 @@
+{{>layout/header}}
+<h1>관리자 댓글보기</h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <a href = "/admin" role="button" class="btn btn-primary">돌아가기</a>
+        </div>
+    </div>
+    <br>
+    <table class="table table-horizontal table-bordered" id="commentTable">
+        <thead class="thrad-strong">
+        <tr>
+            <th>게시글 번호</th>
+            <th>댓글 번호</th>
+            <th>작성자</th>
+            <th>내용</th>
+            <th>최종 수정일</th>
+            <th>신고 횟수</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#comment}}
+            <tr>
+                <td>{{pid}}</td>
+                <td>{{id}}</td>
+                <td>{{author}}</td>
+                <td>{{content}}</td>
+                <td>{{modifiedDate}}</td>
+                <td>{{tag}}</td>
+            </tr>
+        {{/comment}}
+        </tbody>
+    </table>
+</div>
+{{>layout/footer}}
