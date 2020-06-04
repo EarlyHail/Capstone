@@ -10,6 +10,7 @@ public class CommentsResponseDto {
     private String content;
     private String author;
     private Long tag;
+    private Long report;
 
     public CommentsResponseDto(Comments entity){
         this.id = entity.getId();
@@ -17,5 +18,6 @@ public class CommentsResponseDto {
         this.content = entity.getContent();
         this.author = entity.getAuthor();
         this.tag = entity.getTag();
+        this.report = entity.getReport();
     }
 }

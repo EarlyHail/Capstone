@@ -38,7 +38,7 @@ public class CommentsService {
     @Transactional
     public Long report(Long id){
         Comments comment = commentsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 글이 없습니다. id=" + id));;
-        comment.incrementTag();
+        comment.incrementReport();
         return id;
     }
 }

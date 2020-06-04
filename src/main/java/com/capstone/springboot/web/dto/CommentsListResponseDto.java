@@ -12,6 +12,7 @@ public class CommentsListResponseDto {
     private String author;
     private LocalDateTime modifiedDate;
     private Long tag;
+    private Long report;
 
     public CommentsListResponseDto(Comments entity){
         this.id = entity.getId();
@@ -20,5 +21,6 @@ public class CommentsListResponseDto {
         this.author = entity.getAuthor();
         this.modifiedDate = entity.getModifiedDate();
         this.tag = entity.getTag();
+        this.report = entity.getReport();
     }
 }

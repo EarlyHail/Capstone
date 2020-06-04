@@ -24,12 +24,12 @@
                 <td>{{pid}}</td>
                 <td id="commentid">{{id}}</td>
                 <td>{{author}}</td>
-                {{#tag}}
+                {{#report}}
                     <td style="color: transparent; text-shadow: 0 0 5px rgba(0,0,0,0.5);">{{content}}</td>
-                {{/tag}}
-                {{^tag}}
+                {{/report}}
+                {{^report}}
                     <td>{{content}}</td>
-                {{/tag}}
+                {{/report}}
                 <td>{{modifiedDate}}</td>
                 <td>
                     <input type="button" class="btn btn-danger" id="btn-report" value="신고"/>

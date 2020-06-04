@@ -28,16 +28,21 @@ public class Comments extends BaseTimeEntity{
     @Column
     private Long tag;
 
+    @Column
+    private Long report;
+
     @Builder
-    public Comments(String content, String author, Long pid){
+    public Comments(String content, String author, Long pid, Long tag, Long report){
         this.content = content;
         this.author = author;
         this.pid = pid;
+        this.tag = tag;
+        this.report = report;
     }
 
-    public void incrementTag(){
-        if(this.tag == null)
-            this.tag = 0l;
-        this.tag = this.tag + 1;
+    public void incrementReport(){
+        if(this.report == null)
+            this.report = 0l;
+        this.report = this.report + 1;
     }
 }
