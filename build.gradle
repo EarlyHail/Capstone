@@ -36,4 +36,5 @@ dependencies {
     testAnnotationProcessor('org.projectlombok:lombok')
 
     compile('org.springframework.boot:spring-boot-starter-mustache')
+    compile files('libs/jython-standalone-2.7.2.jar')
 }
