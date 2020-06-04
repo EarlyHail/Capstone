@@ -38,7 +38,7 @@ public class PostsService {
 
     @Transactional(readOnly = true) //조회 기능만 사용 -> 속도 개선
     public List<PostsListResponseDto> findAllDesc(){
-        return postsRepository.findAllDesc().stream()
+        return postsRepository.findAll().stream()
                 .map(PostsListResponseDto::new) //람다식, map(posts -> new PostsListResponseDto(post))와 동일
                 .collect(Collectors.toList());
         //postsRepository에서 넘어온 Posts Stream을 map으로 PostsListResponseDto로 변환, List로 반환

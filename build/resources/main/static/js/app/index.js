@@ -20,12 +20,29 @@ var main = {
             var td = tr.children();
 
             var id = td.eq(1).text();
+            var content = td.eq(3).text();
+
+            var words = prompt("어떤 단어들이???")
+
+            var data = {
+                content: content,
+                words: words
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/reports',
+                dataType: 'json',
+                contentType:'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).fail(function (error){
+                alert(JSON.stringify(error));
+            });
 
             $.ajax({
                 type: 'PUT',
                 url: '/api/v1/report/'+id,
                 dataType: 'json',
-                contentType:'application/json; charset=utf-8',
+                contentType:'application/json; charset=utf-8'
             }).done(function() {
                 alert('댓글이 신고되었습니다.');
             }).fail(function (error) {
@@ -105,9 +122,6 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    },
-    report : function () {
-
     }
 };
 main.init();

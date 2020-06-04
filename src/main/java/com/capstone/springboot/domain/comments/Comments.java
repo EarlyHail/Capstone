@@ -1,10 +1,11 @@
 package com.capstone.springboot.domain.comments;
 
 import com.capstone.springboot.domain.BaseTimeEntity;
+import com.capstone.springboot.domain.posts.Posts;
+import com.capstone.springboot.service.PostsService;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 

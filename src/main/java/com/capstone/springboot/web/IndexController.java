@@ -29,7 +29,6 @@ public class IndexController {
     @GetMapping("/posts/save")
     public String postsSave() {
         return "posts-save";
-
     }
 
     @GetMapping("/posts/update/{id}")
@@ -60,5 +59,11 @@ public class IndexController {
     public String adminComments(Model model){
         model.addAttribute("comment", commentsService.findAllTag());
         return "admin-comments";
+    }
+
+    @GetMapping("/admin/reports")
+    public String adminReports(Model model){
+        model.addAttribute("report", postsService.findAllDesc());
+        return "admin-reports";
     }
 }

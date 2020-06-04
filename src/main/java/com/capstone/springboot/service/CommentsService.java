@@ -2,6 +2,7 @@ package com.capstone.springboot.service;
 
 import com.capstone.springboot.domain.comments.Comments;
 import com.capstone.springboot.domain.comments.CommentsRepository;
+import com.capstone.springboot.domain.posts.PostsRepository;
 import com.capstone.springboot.web.dto.CommentsListResponseDto;
 import com.capstone.springboot.web.dto.CommentsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class CommentsService {
     private final CommentsRepository commentsRepository;
+    private final PostsRepository postsRepository;
 
     @Transactional
     public Long save(CommentsSaveRequestDto requestDto){

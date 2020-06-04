@@ -1,15 +1,13 @@
 package com.capstone.springboot.domain.posts;
 
 import com.capstone.springboot.domain.BaseTimeEntity;
+import com.capstone.springboot.domain.comments.Comments;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 //Entity class에는 Setter 메소드를 많들지 않는다!!!!!!!!!
 //값을 Set하려면 특정 기능을 하는 메소드를 생성.

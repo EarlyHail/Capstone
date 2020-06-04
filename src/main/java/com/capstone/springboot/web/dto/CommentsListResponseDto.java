@@ -1,6 +1,7 @@
 package com.capstone.springboot.web.dto;
 
 import com.capstone.springboot.domain.comments.Comments;
+import com.capstone.springboot.domain.posts.Posts;
 
 import java.time.LocalDateTime;
 
