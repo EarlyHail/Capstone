@@ -2,6 +2,7 @@ package com.capstone.springboot.web;
 
 import com.capstone.springboot.service.CommentsService;
 import com.capstone.springboot.service.PostsService;
+import com.capstone.springboot.service.ReportsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class IndexController {
     private final PostsService postsService;
     private final CommentsService commentsService;
+    private final ReportsService reportsService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -23,6 +25,7 @@ public class IndexController {
     @GetMapping("/posts/show/{id}")
     public String postsShow(@PathVariable Long id, Model model) {
         model.addAttribute("post", postsService.findById(id));
+        model.addAttribute("comment", commentsService.findByPid(id));
         return "posts-show";
     }
 
@@ -63,7 +66,7 @@ public class IndexController {
 
     @GetMapping("/admin/reports")
     public String adminReports(Model model){
-        model.addAttribute("report", postsService.findAllDesc());
+        model.addAttribute("report", reportsService.findAllDesc());
         return "admin-reports";
     }
 }

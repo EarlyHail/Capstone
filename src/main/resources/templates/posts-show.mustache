@@ -1,25 +1,22 @@
 {{>layout/header}}
-<h1>게시글 수정</h1>
-<div class="col-md-12">
-    <div class="col-md-4">
-        {{#post}}
-            <div>
-                {{id}}
-            </div>
-            <div>
-                {{title}}
-            </div>
-            <div>
-                {{author}}
-            </div>
-            <div>
-                {{content}}
-            </div>
-        <a href ="/" role="button" class="btn btn-secondary">취소</a>
-        <a href ="/posts/update/{{id}}" role="button" class="btn btn-primary">수정</a>
-        <a href ="/comments/show/{{id}}" role="button" class="btn btn-primary">댓글보기</a>
-        <a href ="/comments/save/{{id}}" role="button" class="btn btn-primary">댓글작성</a>
-        {{/post}}
-    </div>
+<div class="show_page">
+    {{#post}}
+        <div>
+        <div class="show_group">
+            <div class="title">{{title}}</div>
+        </div>
+        <div class="show_group">
+            <div class="author">{{author}}</div>
+        </div>
+        <div class="show_group">
+            <div class="content">{{content}}</div>
+        </div>
+        </div>
+        <div class="below_table">
+            <a href ="/posts/update/{{id}}" role="button" class="btn btn-primary">수정</a>
+        </div>
+    {{/post}}
+    {{>comments-show}}
+    {{>comments-save}}
 </div>
 {{>layout/footer}}

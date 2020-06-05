@@ -1,0 +1,42 @@
+{{>layout/header}}
+<h1>댓글 보기</h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <a href = "/posts/show/{{post.id}}" role="button" class="btn btn-primary">돌아가기</a>
+        </div>
+    </div>
+    <br>
+    <table class="table table-horizontal table-bordered" id="commentTable">
+        <thead class="thrad-strong">
+        <tr>
+            <th>게시글 번호</th>
+            <th>댓글 번호</th>
+            <th>작성자</th>
+            <th>내용</th>
+            <th>최종 수정일</th>
+            <th>신고하기</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#comment}}
+            <tr>
+                <td>{{pid}}</td>
+                <td id="commentid">{{id}}</td>
+                <td>{{author}}</td>
+                {{#report}}
+                    <td class="text_blur">{{content}}</td>
+                {{/report}}
+                {{^report}}
+                    <td>{{content}}</td>
+                {{/report}}
+                <td>{{modifiedDate}}</td>
+                <td>
+                    <input type="button" class="btn btn-danger" id="btn-report" value="신고"/>
+                </td>
+            </tr>
+        {{/comment}}
+        </tbody>
+    </table>
+</div>
+{{>layout/footer}}
