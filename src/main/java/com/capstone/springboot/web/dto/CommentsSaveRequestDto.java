@@ -5,6 +5,7 @@ import com.capstone.springboot.domain.posts.Posts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.python.core.Py;
 import org.python.core.PyFunction;
 import org.python.core.PyInteger;
 import org.python.core.PyString;
@@ -30,7 +31,7 @@ public class CommentsSaveRequestDto {
         System.out.println("toEntity");
         interpreter = new PythonInterpreter();
         String comment = this.content;
-        PyString pyComment = new PyString(comment);
+        PyString pyComment = Py.newStringOrUnicode(comment);
         interpreter.execfile("src/main/java/com/capstone/springboot/test.py");
         PyFunction getTagFunc = (PyFunction)interpreter.get("tagging", PyFunction.class);
         PyInteger pyTag = (PyInteger)(getTagFunc.__call__(pyComment));
