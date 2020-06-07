@@ -8,20 +8,20 @@ var main = {
         $('#btn-update-check').on('click', function () {
             _this.updateCheck();
         });
-        $('#btn-delete').on('click', function () {
+        $('.btn-delete').on('click', function () {
             _this.delete();
         });
         $('#btn-comment-save').on('click', function () {
             _this.commentSave();
         });
-        $('.btn.btn-danger:button').click(function() {
+        $('.btn_report').click(function() {
             var checkBtn = $(this);
 
             var tr = checkBtn.parent().parent();
             var td = tr.children();
 
-            var id = td.eq(1).text();
-            var content = td.eq(3).text();
+            var id = td.eq(0).text();
+            var content = td.eq(2).text();
 
             var words = prompt("어떤 단어들이???")
 
@@ -49,6 +49,7 @@ var main = {
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });
+            window.location.reload();
         });
     },
     save : function () {

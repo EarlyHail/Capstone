@@ -21,8 +21,8 @@ public class ReportsService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReportsListResponseDto> findAllDesc(){
-        return reportsRepository.findAllDesc().stream()
+    public List<ReportsListResponseDto> findAll(){
+        return reportsRepository.findAll().stream()
                 .map(ReportsListResponseDto::new) //람다식, map(posts -> new PostsListResponseDto(post))와 동일
                 .collect(Collectors.toList());
     }

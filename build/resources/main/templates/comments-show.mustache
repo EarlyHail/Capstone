@@ -2,6 +2,7 @@
     <table class="comment_table">
         <thead class="comment_table_head">
         <tr>
+            <th style="display: none"></th>
             <th class="author">작성자</th>
             <th class="content">내용</th>
             <th class="date">날짜</th>
@@ -11,6 +12,7 @@
         <tbody id="tbody">
         {{#comment}}
             <tr>
+                <td style="display: none" id="commentid">{{id}}</td>
                 <td>{{author}}</td>
                 {{#report}}
                     <td class="text_blur">{{content}}</td>
@@ -20,7 +22,7 @@
                 {{/report}}
                 <td>{{modifiedDate}}</td>
                 <td>
-                    <input type="button" class="a_cancel_button" value="신고"/>
+                    <input type="button" class="btn_report" id="a_cancel_button" value="신고"/>
                 </td>
             </tr>
         {{/comment}}

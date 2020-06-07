@@ -55,6 +55,7 @@ body{
    line-height: 1.5em;
    border-top: 1px solid #ccc;
    margin : 20px 10px;
+   word-break: break-all;
 }
 .post_table th {
    width: 100px;
@@ -95,6 +96,7 @@ body{
    line-height: 1.5em;
    border-top: 1px solid #ccc;
    margin : 20px 10px;
+   word-break: break-all;
 }
 .comment_table th {
    width: 100px;
@@ -118,6 +120,12 @@ body{
    width: 10%;
    text-align: center;
 }
+.comment_table .admin_comment{
+   width: 450px;
+}
+.comment_table .admin_report{
+   width: 350px;
+}
 .changeColor {
    background-color: #bff0ff;
 }
@@ -140,7 +148,6 @@ body{
    width:100%;
    border:2px solid #f1f1f1;
    border-radius:3px;
-   height:30px;
    height:300px;
    padding : 10px;
    margin: 10px;
@@ -217,7 +224,7 @@ body{
    color: #fff;
    transform: translateY(-2px);
 }
-.a_cancel_button {
+#a_cancel_button {
    display: inline-block;
    text-align: center;
    line-height: 40px;
@@ -237,9 +244,35 @@ body{
    cursor: pointer;
    outline: none;
 }
-.a_cancel_button:hover {
+#a_cancel_button:hover {
    box-shadow: 0px 15px 20px rgba(46, 67, 97, 0.4);
    transform: translateY(-2px);
    background-color: rgb(247, 116, 116);
    color: white;
+}
+.admin_a_button {
+   display: inline-block;
+   text-align: center;
+   line-height: 60px;
+   width: 160px;
+   height: 60px;
+   font-family: 'Roboto', sans-serif;
+   font-size: 15px;
+   text-transform: uppercase;
+   letter-spacing: 2.5px;
+   font-weight: 500;
+   color: #000;
+   background-color: #fff;
+   border: none;
+   border-radius: 45px;
+   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+   transition: all 0.3s ease 0s;
+   cursor: pointer;
+   outline: none;
+}
+.admin_a_button:hover {
+   background-color: #2e4361;
+   box-shadow: 0px 15px 20px rgba(46, 67, 97, 0.4);
+   color: #fff;
+   transform: translateY(-2px);
 }

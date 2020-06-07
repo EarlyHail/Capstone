@@ -6,6 +6,5 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ReportsRepository extends JpaRepository<Reports, Long> {
-    @Query("SELECT f FROM Reports f ORDER BY f.id DESC")
-    List<Reports> findAllDesc();
+    List<Reports> findAll();
 }

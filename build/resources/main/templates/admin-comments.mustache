@@ -1,22 +1,15 @@
 {{>layout/header}}
 <h1>관리자 댓글보기</h1>
 <div class="col-md-12">
-    <div class="row">
-        <div class="col-md-6">
-            <a href = "/admin" role="button" class="btn btn-primary">돌아가기</a>
-            <a href = "/admin/reports" role="button" class="btn btn-primary">신고 내용 확인</a>
-        </div>
-    </div>
-    <br>
-    <table class="table table-horizontal table-bordered" id="commentTable">
-        <thead class="thrad-strong">
+    <table class="comment_table" id="commentTable">
+        <thead class="comment_table_head">
         <tr>
             <th>게시글 번호</th>
             <th>댓글 번호</th>
             <th>작성자</th>
             <th>내용</th>
             <th>날짜</th>
-            <th>태그</th>
+            <th>신고</th>
         </tr>
         </thead>
         <tbody id="tbody">
@@ -32,5 +25,9 @@
         {{/comment}}
         </tbody>
     </table>
+    <div class="below_table">
+            <a href = "/admin" role="button" class="a_button">돌아가기</a>
+    </div>
+
 </div>
 {{>layout/footer}}

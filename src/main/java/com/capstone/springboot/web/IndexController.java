@@ -66,7 +66,7 @@ public class IndexController {
 
     @GetMapping("/admin/reports")
     public String adminReports(Model model){
-        model.addAttribute("report", reportsService.findAllDesc());
+        model.addAttribute("report", reportsService.findAll());
         return "admin-reports";
     }
 }
