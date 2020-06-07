@@ -28,7 +28,6 @@ public class CommentsSaveRequestDto {
     }
 
     public Comments toEntity(){
-        System.out.println("toEntity");
         interpreter = new PythonInterpreter();
         String comment = this.content;
         PyString pyComment = Py.newStringOrUnicode(comment);
