@@ -1,15 +1,14 @@
 package com.capstone.springboot.web.dto;
 
 import com.capstone.springboot.domain.comments.Comments;
-import com.capstone.springboot.domain.posts.Posts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.python.core.Py;
-import org.python.core.PyFunction;
-import org.python.core.PyInteger;
-import org.python.core.PyString;
 import org.python.util.PythonInterpreter;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 @Getter
 @NoArgsConstructor
@@ -28,13 +27,27 @@ public class CommentsSaveRequestDto {
     }
 
     public Comments toEntity(){
-        interpreter = new PythonInterpreter();
         String comment = this.content;
-        PyString pyComment = Py.newStringOrUnicode(comment);
-        interpreter.execfile("src/main/java/com/capstone/springboot/test.py");
-        PyFunction getTagFunc = (PyFunction)interpreter.get("tagging", PyFunction.class);
-        PyInteger pyTag = (PyInteger)(getTagFunc.__call__(pyComment));
-        this.tag = (long)pyTag.getValue();
+        String result = null;
+        try{
+            Runtime r = Runtime.getRuntime();
+            Process p = r.exec("cmd /c python C:/Users/user/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/test.py "+comment);
+            BufferedReader stdInput = new BufferedReader(new
+                    InputStreamReader(p.getInputStream()));
+            BufferedReader stdError = new BufferedReader(new
+                    InputStreamReader(p.getInputStream()));
+            System.out.println("loop starting....");
+            while((result = stdInput.readLine()) != null){
+                System.out.println("output: "+result);
+                this.tag = (long)Integer.parseInt(result);
+            }
+            while((result = stdError.readLine()) != null) {
+                System.out.println("outputError: " + result);
+            }
+            System.out.println("loop ending......");
+        }catch(IOException e){
+            e.printStackTrace();
+        }
         if(tag == 1)
             report = tag;
         return Comments.builder()

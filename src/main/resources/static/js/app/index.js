@@ -14,6 +14,9 @@ var main = {
         $('#btn-comment-save').on('click', function () {
             _this.commentSave();
         });
+        $('#admin_retagging').on('click', function(){
+            _this.reTagging();
+        })
         $('.btn_report').click(function() {
             var checkBtn = $(this);
 
@@ -123,6 +126,17 @@ var main = {
             window.location.href = '/posts/show/'+pid;
         }).fail(function (error) {
             alert(JSON.stringify(error));
+        });
+    },
+    reTagging : function (){
+        alert("works!");
+        $.ajax({
+            type: 'POST',
+            url: 'api/v1/retagging',
+        }).done(function(){
+            alert('태깅이 완료되었습니다.');
+        }).fail(function(error){
+            alert('다시 시도해주세요.')
         });
     }
 };

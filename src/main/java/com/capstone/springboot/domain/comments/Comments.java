@@ -1,8 +1,6 @@
 package com.capstone.springboot.domain.comments;
 
 import com.capstone.springboot.domain.BaseTimeEntity;
-import com.capstone.springboot.domain.posts.Posts;
-import com.capstone.springboot.service.PostsService;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,5 +43,9 @@ public class Comments extends BaseTimeEntity{
         if(this.report == null)
             this.report = 0l;
         this.report = this.report + 1;
+    }
+    public void reTag() {
+        this.tag = 1l;
+        this.report = 1l;
     }
 }

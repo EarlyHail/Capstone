@@ -8,6 +8,7 @@ import com.capstone.springboot.web.dto.CommentsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +17,6 @@ import java.util.stream.Collectors;
 @Service
 public class CommentsService {
     private final CommentsRepository commentsRepository;
-    private final PostsRepository postsRepository;
 
     @Transactional
     public Long save(CommentsSaveRequestDto requestDto){
@@ -42,6 +42,14 @@ public class CommentsService {
         Comments comment = commentsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 글이 없습니다. id=" + id));;
         comment.incrementReport();
         return id;
+    }
+
+    public Long reTagging() {
+        List<Comments> comments = commentsRepository.findAll();
+        for(Comments c : comments){
+            c.reTag();
+        }
+        return 1l;
     }
 }
 

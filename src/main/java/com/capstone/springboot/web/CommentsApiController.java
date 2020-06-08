@@ -20,4 +20,8 @@ public class CommentsApiController {
         commentsService.report(id);
         return id;
     }
+    @PostMapping("api/v1/retagging")
+    public Long reTagging(){
+        return commentsService.reTagging();
+    }
 }
