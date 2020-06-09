@@ -1,16 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[56]:
 
 
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
-print("importing")
 import pandas as pd
 import sys
 import re
@@ -19,37 +12,36 @@ from konlpy.tag import Okt
 import tensorflow.compat.v1 as tf
 from tensorflow import keras
 import csv
+import json
 from tensorflow.python.keras.preprocessing.sequence import pad_sequences
 from tensorflow.python.keras.preprocessing.text import Tokenizer
-import time
 
-# In[2]:
-print("in python")
-comment = str(sys.argv[1])
+
+# In[ ]:
+
+
+
+
+
+# In[57]:
+
+
+comment = sys.argv[1]
+###comment = sys.argv[1]
 keyword = pd.read_csv("C:/Users/user/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/keyword.csv")
-label = 0
+comment = re.sub("[^가-힣ㄱ-ㅎㅏ-ㅣ\\s]","",comment)
+label = 1            
 for key in keyword['keyword']:
-    if comment in key:
-        label= 1
-df= pd.read_csv('C:/Users/user/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/history.csv',names=['data','label'])
-new_df = pd.DataFrame([{'data':comment,'label':label}])
-new_df.to_csv('C:/Users/user/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/history.csv')
-train_data  = pd.read_csv('C:/Users/user/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/history.csv')
+    if comment.find(key)>=0:
+        label= 0
 
-
-# In[3]:
-
+# In[58]:
+comment = pd.DataFrame(np.array([comment]))
 
 okt = Okt()
 
 
-# In[4]:
-
-
-train_lenght = train_data['data'].astype(str).apply(len)
-
-
-# In[5]:
+# In[43]:
 
 
 def preprocessing(review, okt, remove_stopwords, stop_words=[]):
@@ -73,13 +65,13 @@ def preprocessing(review, okt, remove_stopwords, stop_words=[]):
     return word_review
 
 
-# In[6]:
+# In[44]:
 
 
 stop_words= ['은','는','이','가','하','아','것','들','의','있','되','수','보','주','등','한']
 clean_train_review = []
 
-for review in train_data['data']:
+for review in comment[0]:
     #비어 있는 데이터에서 멈추지 않도록 문자열인 경우만 진행
     if type(review)==str:
         clean_train_review.append(preprocessing(review,okt,True,stop_words))
@@ -87,39 +79,55 @@ for review in train_data['data']:
         clean_train_review.append([]) #string이 아니면 비어있는 값 추가
 
 
-# In[7]:
+# In[45]:
 
 
 tokenizer = Tokenizer()
-# 단어 인덱스를 구축합니다.
-tokenizer.fit_on_texts(clean_train_review)
-# 문자열을 정수 인덱스의 리스트로 변환합니다.
+
+
+# In[46]:
+
+
+with open('C:/Users/user/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/wordIndex.json') as json_file:
+    word_index = json.load(json_file)
+    tokenizer.word_index = word_index
+
+
+# In[47]:
+
+
+tokenizer.word_index
+
+
+# In[48]:
+
+
 train_sequences = tokenizer.texts_to_sequences(clean_train_review)
 
-word_vocab = tokenizer.word_index #단어 사전 형태
-MAX_SEQUENCE_LENGHT = 12
 
-
-# In[8]:
-
-
-#학습 데이터를 벡터화
-train_inputs = pad_sequences(train_sequences, maxlen = MAX_SEQUENCE_LENGHT, padding='post')
-#학습 데이터의 라벨
-train_labels = np.array(train_data['label'])
-
-
-# In[9]:
+# In[49]:
 
 
 BATCH_SIZE=16
 NUM_EPOCHS = 20
 #ocab_size = preproconfigs['vocab_size']
 embedding_size = 128
-vocab_size = len(word_vocab)+1
+
+vocab_size = len(tokenizer.word_index)+1
+MAX_SEQUENCE_LENGHT = 12
 
 
-# In[10]:
+# In[50]:
+
+
+#학습 데이터를 벡터화
+train_inputs = pad_sequences(train_sequences, maxlen = MAX_SEQUENCE_LENGHT, padding='post')
+#학습 데이터의 라벨
+train_labels = np.array([label])
+
+
+# In[51]:
+
 
 
 def model_fn(features, labels, mode, params):
@@ -234,16 +242,13 @@ def model_fn(features, labels, mode, params):
         )
 
 
-# In[11]:
+# In[52]:
+
 
 
 def mapping_fn(X, Y):
     input, label = {'x': X}, Y
     return input, label
-
-
-# In[12]:
-
 
 def test_input_fn():
     dataset = tf.data.Dataset.from_tensor_slices((train_inputs,train_labels))
@@ -254,24 +259,41 @@ def test_input_fn():
     return iterator.get_next()
 
 
-# In[13]:
-
+# In[53]:
 
 
 def tagging():
-    time.sleep(10)
     model_fn2 = tf.estimator.Estimator(model_fn, model_dir="data_out/checkpoint/cnn_model")
-
     ### predict 계산
     predict = model_fn2.evaluate(test_input_fn)
     result = predict.get('acc')
-    
     if label ==0 :
-        if result ==1 : print ("0")
-    if label ==1:
-        if result ==0: print ("0")
-    if label ==1 :
         if result ==1 : print ("1")
+    if label ==1:
+        if result ==0: print ("1")
+    if label ==1 :
+        if result ==1 : print ("0")
     if label ==0 :
-        if result == 0 : print ("1")
+        if result == 0 : print ("0")
+
+
+# In[54]:
+
+
 tagging()
+
+
+# In[55]:
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+

@@ -28,7 +28,6 @@ public class CommentsListResponseDto {
         this.pid = entity.getPid();
         this.content = entity.getContent();
         this.author = entity.getAuthor();
-        System.out.println(modifiedDate);
         this.modifiedDate = toStringDateTime(entity.getModifiedDate());
         this.tag = entity.getTag();
         this.report = entity.getReport();

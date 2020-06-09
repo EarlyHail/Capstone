@@ -30,21 +30,19 @@ public class CommentsSaveRequestDto {
         String comment = this.content;
         String result = null;
         try{
+            System.out.println(comment);
             Runtime r = Runtime.getRuntime();
-            Process p = r.exec("cmd /c python C:/Users/user/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/test.py "+comment);
+            Process p = r.exec("python C:/Users/user/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/final.py "+comment);
             BufferedReader stdInput = new BufferedReader(new
                     InputStreamReader(p.getInputStream()));
             BufferedReader stdError = new BufferedReader(new
-                    InputStreamReader(p.getInputStream()));
-            System.out.println("loop starting....");
-            while((result = stdInput.readLine()) != null){
-                System.out.println("output: "+result);
-                this.tag = (long)Integer.parseInt(result);
+                    InputStreamReader(p.getErrorStream()));
+            while ((result = stdError.readLine()) != null){}
+            while((result = stdInput.readLine()) != null) {
+                System.out.println(result);
+                if(result.length() <= 1)
+                    this.tag = (long)Integer.parseInt(result);
             }
-            while((result = stdError.readLine()) != null) {
-                System.out.println("outputError: " + result);
-            }
-            System.out.println("loop ending......");
         }catch(IOException e){
             e.printStackTrace();
         }
