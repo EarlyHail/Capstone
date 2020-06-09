@@ -48,6 +48,9 @@ body{
    margin:0;
    font-family: 'Noto Sans KR', sans-serif;
 }
+h1{
+   font-family: 'Gugi', cursive;
+}
 .post_table{
    border-collapse: separate;
    border-spacing: 1px;

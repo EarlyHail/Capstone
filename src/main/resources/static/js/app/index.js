@@ -16,7 +16,37 @@ var main = {
         });
         $('#admin_retagging').on('click', function(){
             _this.reTagging();
-        })
+        });
+        $('.admin_accept').on('click', function(){
+            var checkBtn = $(this);
+
+            var tr = checkBtn.parent().parent();
+            var td = tr.children();
+
+            var id = td.eq(0).text();
+            var cid = td.eq(1).text();
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/comments/ban/'+cid,
+                dataType: 'json',
+                contentType:'application/json; charset=utf-8',
+            }).fail(function (error){
+                alert(JSON.stringify(error));
+            });
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/reports/accept/'+id,
+                dataType: 'json',
+                contentType:'application/json; charset=utf-8',
+            }).done(function() {
+                alert('확인되었습니다.');
+            }).fail(function (error){
+                alert(JSON.stringify(error));
+            });
+        });
+        $('.admin_abort').on('click', function(){
+
+        });
         $('.btn_report').click(function() {
             var checkBtn = $(this);
 
@@ -26,33 +56,30 @@ var main = {
             var id = td.eq(0).text();
             var content = td.eq(2).text();
 
-            var words = prompt("어떤 단어들이???")
-
+            var words = prompt("어떤 단어를 신고하시겠습니까?")
             var data = {
+                cid: id,
                 content: content,
                 words: words
             };
             $.ajax({
-                type: 'POST',
-                url: '/api/v1/reports',
-                dataType: 'json',
-                contentType:'application/json; charset=utf-8',
-                data: JSON.stringify(data)
-            }).fail(function (error){
-                alert(JSON.stringify(error));
-            });
-
-            $.ajax({
                 type: 'PUT',
-                url: '/api/v1/report/'+id,
+                url: '/api/v1/report/' + id,
                 dataType: 'json',
-                contentType:'application/json; charset=utf-8'
-            }).done(function() {
-                alert('댓글이 신고되었습니다.');
+                contentType: 'application/json; charset=utf-8'
             }).fail(function (error) {
                 alert(JSON.stringify(error));
             });
-            window.location.reload();
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/reports',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+            alert('댓글이 신고되었습니다.');
         });
     },
     save : function () {

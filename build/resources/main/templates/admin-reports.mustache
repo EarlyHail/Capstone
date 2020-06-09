@@ -1,19 +1,35 @@
 {{>layout/header}}
-<h1>관리자 댓글보기</h1>
+<h1>관리자 페이지</h1>
 <div class="col-md-12">
     <table class="comment_table" id="commentTable">
         <thead class="thrad-strong">
         <tr>
+            <th style="display: none"></th>
+            <th style="display: none"></th>
             <th class="admin_comment">댓글</th>
             <th class="admin_report">신고 내용</th>
+            <th class="admin_accept">확인</th>
+            <th class="admin_abort">취소</th>
         </tr>
         </thead>
         <tbody id="tbody">
         {{#report}}
+        {{#permission}}
+        {{/permission}}
+        {{^permission}}
             <tr>
+                <td style="display: none" id="reportid">{{id}}</td>
+                <td style="display: none" id="commentid">{{cid}}</td>
                 <td>{{content}}</td>
                 <td>{{words}}</td>
+                <td>
+                    <input type="button" class="admin_accept" id="a_cancel_button" value="확인"/>
+                </td>
+                <td>
+                    <input type="button" class="admin_abort" id="a_cancel_button" value="취소"/>
+                </td>
             </tr>
+        {{/permission}}
         {{/report}}
         </tbody>
     </table>

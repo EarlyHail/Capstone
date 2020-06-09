@@ -12,6 +12,7 @@ public class CommentsResponseDto {
     private String author;
     private Long tag;
     private Long report;
+    private Long banned;
 
     public CommentsResponseDto(Comments entity){
         this.id = entity.getId();
@@ -20,5 +21,6 @@ public class CommentsResponseDto {
         this.author = entity.getAuthor();
         this.tag = entity.getTag();
         this.report = entity.getReport();
+        this.banned = entity.getBanned();
     }
 }

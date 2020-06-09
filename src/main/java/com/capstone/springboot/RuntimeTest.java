@@ -12,7 +12,7 @@ public class RuntimeTest {
         try{
             Runtime r = Runtime.getRuntime();
             String comment = "시발";
-            Process p = r.exec("python C:/Users/user/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/final.py 씨발");
+            Process p = r.exec("python C:/Users/HojinLee/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/final.py 씨발");
             BufferedReader stdInput = new BufferedReader(new
                     InputStreamReader(p.getInputStream()));
             BufferedReader stdError = new BufferedReader(new

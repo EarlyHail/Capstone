@@ -13,6 +13,6 @@ public interface CommentsRepository extends JpaRepository<Comments, Long> {
 
     List<Comments> findByPid(Long pid);
 
-    @Query("Select c FROM Comments c Where c.report > 0")
+    @Query("Select c FROM Comments c Where c.tag > 0")
     List<Comments> findAllTag();
 }

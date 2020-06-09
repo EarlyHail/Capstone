@@ -18,7 +18,7 @@ public class CommentsSaveRequestDto {
     private String author;
     private Long pid;
     private Long tag;
-    private Long report;
+    private Long banned;
     @Builder
     public CommentsSaveRequestDto(String content, String author, Long pid) {
         this.content = content;
@@ -32,12 +32,12 @@ public class CommentsSaveRequestDto {
         try{
             System.out.println(comment);
             Runtime r = Runtime.getRuntime();
-            Process p = r.exec("python C:/Users/user/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/final.py "+comment);
+            Process p = r.exec("python C:/Users/HojinLee/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/final.py "+comment);
             BufferedReader stdInput = new BufferedReader(new
                     InputStreamReader(p.getInputStream()));
             BufferedReader stdError = new BufferedReader(new
                     InputStreamReader(p.getErrorStream()));
-            while ((result = stdError.readLine()) != null){}
+            while((result = stdError.readLine()) != null);
             while((result = stdInput.readLine()) != null) {
                 System.out.println(result);
                 if(result.length() <= 1)
@@ -47,13 +47,13 @@ public class CommentsSaveRequestDto {
             e.printStackTrace();
         }
         if(tag == 1)
-            report = tag;
+            banned = tag;
         return Comments.builder()
                 .content(content)
                 .author(author)
                 .pid(pid)
                 .tag(tag)
-                .report(report)
+                .banned(banned)
                 .build();
     }
 }

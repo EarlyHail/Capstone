@@ -24,4 +24,9 @@ public class CommentsApiController {
     public Long reTagging(){
         return commentsService.reTagging();
     }
+
+    @PostMapping("api/v1/comments/ban/{id}")
+    public Long ban(@PathVariable Long id){
+        return commentsService.ban(id);
+    }
 }

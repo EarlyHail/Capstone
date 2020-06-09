@@ -15,6 +15,7 @@ public class CommentsListResponseDto {
     private String modifiedDate;
     private Long tag;
     private Long report;
+    private Long banned;
 
     private String toStringDateTime(LocalDateTime localDateTime){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd");
@@ -31,5 +32,6 @@ public class CommentsListResponseDto {
         this.modifiedDate = toStringDateTime(entity.getModifiedDate());
         this.tag = entity.getTag();
         this.report = entity.getReport();
+        this.banned = entity.getBanned();
     }
 }

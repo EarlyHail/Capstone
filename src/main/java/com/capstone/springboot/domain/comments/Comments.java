@@ -30,13 +30,16 @@ public class Comments extends BaseTimeEntity{
     @Column
     private Long report;
 
+    @Column
+    private Long banned;
+
     @Builder
-    public Comments(String content, String author, Long pid, Long tag, Long report){
+    public Comments(String content, String author, Long pid, Long tag, Long banned){
         this.content = content;
         this.author = author;
         this.pid = pid;
         this.tag = tag;
-        this.report = report;
+        this.banned = banned;
     }
 
     public void incrementReport(){
@@ -47,5 +50,8 @@ public class Comments extends BaseTimeEntity{
     public void reTag() {
         this.tag = 1l;
         this.report = 1l;
+    }
+    public void ban(){
+        this.banned = 1l;
     }
 }

@@ -1,5 +1,5 @@
 {{>layout/header}}
-<h1>관리자 댓글보기</h1>
+<h1>관리자 페이지</h1>
 <div class="col-md-12">
     <table class="comment_table" id="commentTable">
         <thead class="comment_table_head">
@@ -9,7 +9,6 @@
             <th>작성자</th>
             <th>내용</th>
             <th>날짜</th>
-            <th>신고</th>
         </tr>
         </thead>
         <tbody id="tbody">
@@ -20,7 +19,6 @@
                 <td>{{author}}</td>
                 <td>{{content}}</td>
                 <td>{{modifiedDate}}</td>
-                <td>{{report}}</td>
             </tr>
         {{/comment}}
         </tbody>

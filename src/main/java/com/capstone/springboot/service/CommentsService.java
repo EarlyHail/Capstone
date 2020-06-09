@@ -44,10 +44,17 @@ public class CommentsService {
         return id;
     }
 
+    @Transactional
+    public Long ban(Long id){
+        Comments comment = commentsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 글이 없습니다. id=" + id));;
+        comment.ban();
+        return id;
+    }
+
+    @Transactional
     public Long reTagging() {
         List<Comments> comments = commentsRepository.findAll();
         for(Comments c : comments){
-            c.reTag();
         }
         return 1l;
     }

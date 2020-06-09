@@ -14,12 +14,12 @@
             <tr>
                 <td style="display: none" id="commentid">{{id}}</td>
                 <td>{{author}}</td>
-                {{#report}}
+                {{#banned}}
                     <td class="text_blur">{{content}}</td>
-                {{/report}}
-                {{^report}}
+                {{/banned}}
+                {{^banned}}
                     <td>{{content}}</td>
-                {{/report}}
+                {{/banned}}
                 <td>{{modifiedDate}}</td>
                 <td>
                     <input type="button" class="btn_report" id="a_cancel_button" value="신고"/>

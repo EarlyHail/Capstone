@@ -24,11 +24,13 @@ from tensorflow.python.keras.preprocessing.text import Tokenizer
 
 
 # In[57]:
-
-
-comment = sys.argv[1]
+leng = len(sys.argv)
+comment =""
+for i in range(1, leng):
+    comment = comment + sys.argv[i] + " "
+print(comment)
 ###comment = sys.argv[1]
-keyword = pd.read_csv("C:/Users/user/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/keyword.csv")
+keyword = pd.read_csv("C:/Users/HojinLee/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/keyword.csv")
 comment = re.sub("[^가-힣ㄱ-ㅎㅏ-ㅣ\\s]","",comment)
 label = 1            
 for key in keyword['keyword']:
@@ -80,15 +82,13 @@ for review in comment[0]:
 
 
 # In[45]:
-
-
 tokenizer = Tokenizer()
 
 
 # In[46]:
 
 
-with open('C:/Users/user/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/wordIndex.json') as json_file:
+with open('C:/Users/HojinLee/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/wordIndex.json') as json_file:
     word_index = json.load(json_file)
     tokenizer.word_index = word_index
 
@@ -124,7 +124,7 @@ MAX_SEQUENCE_LENGHT = 12
 train_inputs = pad_sequences(train_sequences, maxlen = MAX_SEQUENCE_LENGHT, padding='post')
 #학습 데이터의 라벨
 train_labels = np.array([label])
-
+print(train_inputs)
 
 # In[51]:
 
@@ -263,18 +263,17 @@ def test_input_fn():
 
 
 def tagging():
-    model_fn2 = tf.estimator.Estimator(model_fn, model_dir="data_out/checkpoint/cnn_model")
+    model_fn2 = tf.estimator.Estimator(model_fn, model_dir="C:/Users/HojinLee/IdeaProjects/Capstone/src/main/java/com/capstone/springboot/python/data_out/checkpoint/cnn_model")
     ### predict 계산
     predict = model_fn2.evaluate(test_input_fn)
     result = predict.get('acc')
+    print("label : ",label)
+    print("result : ",result)
     if label ==0 :
-        if result ==1 : print ("1")
+        print ("1")
     if label ==1:
         if result ==0: print ("1")
-    if label ==1 :
-        if result ==1 : print ("0")
-    if label ==0 :
-        if result == 0 : print ("0")
+        elif result ==1 : print ("0")
 
 
 # In[54]:
